@@ -1,46 +1,60 @@
-# React Mock Code Challenge: Plantsy
+# Bank of Flatiron
 
-## Demo
+Welcome to the Bank of Flatiron, where you can trust us with all your financial
+data! Use the below gif as an example of how the app should function.
 
-Use this gif as an example of how the app should work.
+![demo](https://curriculum-content.s3.amazonaws.com/phase-2/phase-2-code-challenge-bank-of-flatiron/demo.gif)
 
-![Demo GIF](https://curriculum-content.s3.amazonaws.com/phase-2/react-hooks-mock-code-challenge-plantshop/plantsy_demo.gif)
+> To view in VSCode, right click on the README.md file and select "Open Preview".
 
 ## Instructions
 
-Welcome to Plantsy! You've been tasked with building out some features for the
-admin side of a plant store. The designers have put together the components and
-CSS. Now it's up to you to bring the features to life by adding stateful logic
-as well as persisting data to the backend via our API.
+For this project, you’ll be building out a React application that displays a
+list of your recent bank transactions, among other features.
 
-Your job will be to make our app work according to the user stories you will
-find the [Core Deliverables](#Core-Deliverables) section.
+Part of what this code challenge is testing is your ability to follow given
+instructions. While you will definitely have a significant amount of freedom in
+how you implement the features, be sure to carefully read the directions for
+setting up the application.
 
 ## Setup
 
-1. Run `npm install` in your terminal.
-2. Run `npm run server`. This will run your backend on port `6001`.
-3. In a new terminal, run `npm start`.
+After unbundling the project:
 
-Make sure to open [http://localhost:6001/plants](http://localhost:6001/plants)
-in the browser to verify that your backend is working before you proceed!
+1. Run `npm install` in your terminal.
+2. Run `npm run server`. This will run your backend on port `8001`.
+3. In a new terminal, run `npm start`. This will run your React app on port `8000`.
+
+Make sure to open
+[http://localhost:8001/transactions](http://localhost:8001/transactions) in the
+browser to verify that your backend is working before you proceed!
+
+The app uses [Semantic UI](https://semantic-ui.com/) for styling. If you see any
+unfamiliar classNames on some components, don't sweat! That's coming from
+Semantic UI and you shouldn't need to touch it.
+
+If you are unfamiliar with HTML tables, take a look at the
+[docs with an example here](https://www.w3schools.com/html/html_tables.asp)
 
 ## Endpoints
 
-The base URL for your backend is: `http://localhost:6001`
+The base URL for your backend is: `http://localhost:8001`
 
 ## Core Deliverables
 
-As a user:
+As a user, I should be able to:
 
-1. When the app starts, I can see all plants.
-2. I can add a new plant to the page by submitting the form.
-3. I can mark a plant as "sold out".
-4. I can search for plants by their name and see a filtered list of plants.
+- See a table of the transactions.
+- Fill out and submit the form to add a new transaction. This should add the new
+  transaction to the table **as well as post the new transaction to the backend
+  API for persistence**.
+- Filter transactions by typing into the search bar. Only transactions with a
+  description matching the search term should be shown in the transactions
+  table.
 
 ### Endpoints for Core Deliverables
 
-#### GET /plants
+#### GET /transactions
 
 Example Response:
 
@@ -48,20 +62,22 @@ Example Response:
 [
   {
     "id": 1,
-    "name": "Aloe",
-    "image": "./images/aloe.jpg",
-    "price": 15.99
+    "date": "2019-12-01",
+    "description": "Paycheck from Bob's Burgers",
+    "category": "Income",
+    "amount": 1000
   },
   {
     "id": 2,
-    "name": "ZZ Plant",
-    "image": "./images/zz-plant.jpg",
-    "price": 25.98
+    "date": "2019-12-01",
+    "description": "South by Southwest Quinoa Bowl at Fresh & Co",
+    "category": "Food",
+    "amount": -10.55
   }
 ]
 ```
 
-#### POST `/plants`
+#### POST `/transactions`
 
 Required Headers:
 
@@ -75,9 +91,10 @@ Request Object:
 
 ```json
 {
-  "name": "string",
-  "image": "string",
-  "price": number
+  "date": "string",
+  "description": "string",
+  "category": "string",
+  "amount": number
 }
 ```
 
@@ -86,9 +103,10 @@ Example Response:
 ```json
 {
   "id": 1,
-  "name": "Aloe",
-  "image": "./images/aloe.jpg",
-  "price": 15.99
+  "date": "2019-12-01",
+  "description": "Paycheck from Bob's Burgers",
+  "category": "Income",
+  "amount": 1000
 }
 ```
 
@@ -98,50 +116,17 @@ These deliverables are not required to pass the code challenge, but if you have
 the extra time, or even after the code challenge, they are a great way to
 stretch your skills.
 
-You'll have to add additional elements for these features. Feel free to style
-them however you see fit!
-
 > Note: If you are going to attempt these advanced deliverables, please be sure
 > to have a working commit with all the Core Deliverables first!
 
-As a user:
+As a user, I should be able to:
 
-1. I can update the price of a plant and still see the updated price after
-   refreshing the page.
-2. I can delete a plant and it is still gone when I refresh the page.
+- Sort transactions alphabetically by category or description.
+- Delete a transaction which will remove it from the table and delete it from the backend.
 
 ### Endpoints for Advanced Deliverables
 
-#### PATCH /plants/:id
-
-Required Headers:
-
-```js
-{
-  "Content-Type": "application/json"
-}
-```
-
-Request Object:
-
-```json
-{
-  "price": number
-}
-```
-
-Example Response:
-
-```json
-{
-  "id": 1,
-  "name": "Aloe",
-  "image": "./images/aloe.jpg",
-  "price": 16.99
-}
-```
-
-#### DELETE /plants/:id
+#### DELETE /transactions/:id
 
 Example Response:
 

@@ -1,15 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 
-function Search() {
+function Search({search, handleSearch}) {
   return (
-    <div className="searchbar">
-      <label htmlFor="search">Search Plants:</label>
+    <div className="ui large fluid icon input">
       <input
         type="text"
-        id="search"
-        placeholder="Type a name to search..."
-        onChange={(e) => console.log("Searching...")}
+        placeholder="Search your Recent Transactions"
+        onChange={e =>handleSearch(e)} value={search}
       />
+      <i className="circular search link icon"></i>
     </div>
   );
 }
